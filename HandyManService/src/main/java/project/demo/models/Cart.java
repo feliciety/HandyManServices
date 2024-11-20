@@ -8,7 +8,8 @@ public class Cart {
 
     private static Cart instance;
 
-    private Cart() {}
+    private Cart() {
+    }
 
     public static Cart getInstance() {
         if (instance == null) {

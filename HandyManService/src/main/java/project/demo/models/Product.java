@@ -13,13 +13,39 @@ public class Product {
         this.imagePath = new SimpleStringProperty(imagePath);
     }
 
-    // Getters and setters
-    public String getName() { return name.get(); }
-    public StringProperty nameProperty() { return name; }
+    public String getName() {
+        return name.get();
+    }
 
-    public double getPrice() { return price.get(); }
-    public DoubleProperty priceProperty() { return price; }
+    public void setName(String name) {
+        this.name.set(name);
+    }
 
-    public String getImagePath() { return imagePath.get(); }
-    public StringProperty imagePathProperty() { return imagePath; }
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price.get();
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public String getImagePath() {
+        return imagePath.get();
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath.set(imagePath);
+    }
+
+    public StringProperty imagePathProperty() {
+        return imagePath;
+    }
 }
