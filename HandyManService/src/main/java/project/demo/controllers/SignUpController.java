@@ -31,27 +31,23 @@ public  class SignUpController {
     // Event handler for the Sign In button
     @FXML
     private void signUpButtonClicked() {
-        // Get the text entered in the fields
         String username = usernameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        // Validate the input fields
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             System.out.println("All fields are required!");
-            // Ideally, display a warning message in the UI (e.g., a label or alert dialog)
-        } else if (!email.contains("@") || !email.contains(".")) {
-            System.out.println("Invalid email format.");
-            // Show error for invalid email format
-        } else if (password.length() < 6) {
-            System.out.println("Password must be at least 6 characters long.");
-            // Show error for weak password
         } else {
-            // All inputs are valid
-            System.out.println("Sign Up successful with username: " + username + ", email: " + email);
-
-            // Load the MainpageStructure.fxml
-            loadHomePage();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/MainpageStructure.fxml"));
+                AnchorPane mainPage = loader.load();
+                Stage stage = (Stage) signUpButton.getScene().getWindow();
+                stage.setScene(new Scene(mainPage));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error navigating to MainpageStructure.fxml.");
+            }
         }
     }
 
@@ -67,7 +63,7 @@ public  class SignUpController {
     private void loadHomePage() {
         try {
             // Load MainpageStructure.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/FXML/MainpageStructure.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/MainpageStructure.fxml"));
             AnchorPane homePageRoot = loader.load();
 
             // Get the current stage
@@ -91,7 +87,7 @@ public  class SignUpController {
     private void signInSwap() {
         try {
             // Load SignUp.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/FXML/SignIn.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/SignIn.fxml"));
             AnchorPane signUpRoot = loader.load();
 
             // Create a new scene for the SignUp page

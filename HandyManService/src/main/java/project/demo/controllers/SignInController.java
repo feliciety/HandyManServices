@@ -66,8 +66,7 @@ public class SignInController {
     // Load the MainpageStructure.fxml after successful sign-in
     private void loadHomePage() {
         try {
-            // Ensure the path is correct (adjust the path as per your project structure)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/FXML/MainpageStructure.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/MainpageStructure.fxml"));
             AnchorPane homePageRoot = loader.load(); // Load the HomePage FXML
 
             // Create a new scene for the HomePage
@@ -88,7 +87,7 @@ public class SignInController {
     private void signUpSwap() {
         try {
             // Load SignUpPage FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/FXML/SignUp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/SignUp.fxml"));
             AnchorPane signUpRoot = loader.load();
 
             // Create a new scene for the SignUpPage
