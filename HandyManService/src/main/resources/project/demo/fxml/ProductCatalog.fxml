@@ -5,11 +5,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="730" prefWidth="1440" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.ProductCatalogController">
 
@@ -38,6 +42,39 @@
             <padding>
                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
+            <children>
+               <VBox prefHeight="479.0" prefWidth="290.0">
+                  <children>
+                     <ImageView fx:id="productImage" fitHeight="281.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/helmet.png" />
+                        </image>
+                     </ImageView>
+                     <VBox alignment="CENTER" prefHeight="156.0" prefWidth="246.0">
+                        <children>
+                           <Label fx:id="productName" alignment="CENTER" text="Helmet">
+                              <font>
+                                 <Font name="Inter Semi Bold" size="30.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="productPrice" alignment="CENTER" prefHeight="61.0" prefWidth="87.0" text="\$29.99">
+                              <font>
+                                 <Font size="20.0" />
+                              </font>
+                           </Label>
+                           <Button fx:id="addtocartBTN" alignment="CENTER" maxWidth="108.0" mnemonicParsing="false" prefHeight="152.0" prefWidth="108.0" style="-fx-background-color: #ffc107;" text="Add to Cart">
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                           </Button>
+                        </children>
+                        <VBox.margin>
+                           <Insets top="10.0" />
+                        </VBox.margin>
+                     </VBox>
+                  </children>
+               </VBox>
+            </children>
 
          </GridPane>
       </content></ScrollPane>
