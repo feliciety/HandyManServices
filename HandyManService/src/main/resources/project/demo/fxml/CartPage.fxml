@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="730" prefWidth="1440" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.CartController">
+    <HBox fx:id="topBar" alignment="CENTER_LEFT" layoutX="0" layoutY="0" prefHeight="60" prefWidth="1440" spacing="20" style="-fx-background-color: #f4f4f4; -fx-padding: 20;">
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Your Cart">
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="catalogButton" onAction="#goToCatalog" styleClass="secondary-button" text="Continue Shopping">
+         <HBox.margin>
+            <Insets right="10.0" />
+         </HBox.margin></Button>
+    </HBox>
+
+    <TableView fx:id="cartTable" layoutX="70" layoutY="80" prefHeight="500" prefWidth="1300">
+        <columns>
+            <TableColumn fx:id="productNameColumn" prefWidth="700" text="Product Name" />
+            <TableColumn fx:id="productPriceColumn" prefWidth="200" text="Price" />
+            <TableColumn fx:id="productQuantityColumn" prefWidth="200" text="Quantity" />
+            <TableColumn fx:id="productTotalColumn" prefWidth="200" text="Total" />
+        </columns>
+    </TableView>
+
+    <HBox alignment="CENTER_RIGHT" layoutX="900" layoutY="600" spacing="10">
+        <Label style="-fx-font-size: 16px;" text="Subtotal:" />
+        <Label fx:id="subtotalLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+    </HBox>
+
+
+    <Button fx:id="checkoutButton" layoutX="1230" layoutY="650" onAction="#proceedToCheckout" prefWidth="200" styleClass="primary-button" text="Proceed to Checkout" AnchorPane.rightAnchor="276.0" />
+
+</AnchorPane>
