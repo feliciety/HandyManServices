@@ -5,22 +5,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="985.0" prefWidth="1368.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.CartController">
-   <ImageView fitHeight="987.0" fitWidth="1927.0" layoutX="-218.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/CartPageBG.png" />
-      </image>
-   </ImageView>
+<AnchorPane fx:id="anchorPane" prefHeight="1319.0" prefWidth="1368.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.CartController">
 
     <!-- Top Bar -->
-    <HBox fx:id="topBar" alignment="CENTER_LEFT" layoutX="-2.0" layoutY="113.0" prefHeight="60" prefWidth="1372.0" spacing="20" style="-fx-background-color: #f4f4f4; -fx-padding: 10;">
+    <HBox fx:id="topBar" alignment="CENTER_LEFT" layoutX="64.0" layoutY="487.0" prefHeight="60" prefWidth="1250.0" spacing="20" style="-fx-background-color: #f4f4f4; -fx-padding: 10;">
         <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Your Cart">
             <HBox.margin>
                 <Insets left="20.0" />
@@ -42,10 +35,10 @@
     </HBox>
 
     <!-- Cart Table -->
-    <TableView fx:id="cartTable" layoutX="72.0" layoutY="209.0" prefHeight="500" prefWidth="1300">
+    <TableView fx:id="cartTable" layoutX="63.0" layoutY="601.0" prefHeight="482.0" prefWidth="1244.0">
         <columns>
-            <TableColumn fx:id="productNameColumn" prefWidth="700" text="Product Name" />
-            <TableColumn fx:id="productPriceColumn" prefWidth="200" text="Price" />
+            <TableColumn fx:id="productNameColumn" prefWidth="578.4000358581543" text="Product Name" />
+            <TableColumn fx:id="productPriceColumn" prefWidth="321.5999755859375" text="Price" />
             <TableColumn fx:id="productQuantityColumn" prefWidth="200" text="Quantity" />
             <TableColumn fx:id="productTotalColumn" prefWidth="200" text="Total" />
         </columns>
@@ -57,11 +50,11 @@
     </HBox>
 
     <!-- Proceed to Checkout Button -->
-    <Button fx:id="checkoutButton" layoutX="1091.0" layoutY="743.0" onAction="#proceedToCheckout" prefHeight="62.0" prefWidth="290.0" style="-fx-background-color: #FFC107; -fx-background-radius: 30;" styleClass="primary-button" text="Proceed to Checkout">
+    <Button fx:id="checkoutButton" layoutX="1009.0" layoutY="1149.0" onAction="#proceedToCheckout" prefHeight="62.0" prefWidth="290.0" style="-fx-background-color: #FFC107; -fx-background-radius: 30;" styleClass="primary-button" text="Proceed to Checkout">
       <font>
          <Font name="System Bold" size="20.0" />
       </font></Button>
-     <Label layoutX="969.0" layoutY="724.0" style="-fx-font-size: 16px;" text="Subtotal:">
+     <Label layoutX="960.0" layoutY="1098.0" style="-fx-font-size: 16px;" text="Subtotal:">
       <font>
          <Font name="System Bold" size="13.0" />
       </font>
