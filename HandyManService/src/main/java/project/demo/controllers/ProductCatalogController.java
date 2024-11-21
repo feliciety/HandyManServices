@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -26,25 +27,41 @@ public class ProductCatalogController {
     private final Cart cart = Cart.getInstance();
 
     @FXML
+    private AnchorPane anchorPane;
+
+    @FXML
     private void initialize() {
-        // List of products with their images
+        // Apply stylesheet dynamically
+        if (anchorPane != null && anchorPane.getScene() != null) {
+            anchorPane.getScene().getStylesheets().add(getClass().getResource("/project/demo/CSS/styles.css").toExternalForm());
+        } else if (anchorPane != null) {
+            anchorPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
+                if (newScene != null) {
+                    newScene.getStylesheets().add(getClass().getResource("/project/demo/CSS/styles.css").toExternalForm());
+                }
+            });
+        }
+
+        // List of products
         Product[] products = {
-                new Product("Cordless Drill", 99.99, "resources/project/demo/images/CordlessDrill.png"),
-                new Product("Hand Drill", 39.99, "resources/project/demo/images/handdrill.png"),
-                new Product("Handsaw", 25.49, "resources/project/demo/images/handsaw.png"),
-                new Product("Hand Vacuum", 59.99, "resources/project/demo/images/HandVacuum.png"),
-                new Product("Helmet", 15.99, "resources/project/demo/images/helmet.png"),
-                new Product("Metal Hand Jigsaw", 40.99, "resources/project/demo/images/metalhandjigsaw.png"),
-                new Product("Metal Shovel", 22.49, "resources/project/demo/images/metalshovel.png"),
-                new Product("Pipe Wrench", 18.99, "resources/project/demo/images/pipewrench.png"),
-                new Product("Rubber Hand Gloves", 9.99, "resources/project/demo/images/rubberhandgloves.png"),
-                new Product("Steel Hammer", 14.99, "resources/project/demo/images/steelhammer.png"),
-                new Product("Steel Plier", 12.99, "resources/project/demo/images/steelplier.png"),
-                new Product("Toolbox", 29.99, "resources/project/demo/images/toolbox.png")
+                new Product("Cordless Drill", 99.99, "/project/demo/images/CordlessDrill.png"),
+                new Product("Hand Drill", 39.99, "/project/demo/images/handdrill.png"),
+                new Product("Handsaw", 25.49, "/project/demo/images/handsaw.png"),
+                new Product("Hand Vacuum", 59.99, "/project/demo/images/HandVacuum.png"),
+                new Product("Helmet", 15.99, "/project/demo/images/helmet.png"),
+                new Product("Metal Hand Jigsaw", 40.99, "/project/demo/images/metalhandjigsaw.png"),
+                new Product("Metal Shovel", 22.49, "/project/demo/images/metalshovel.png"),
+                new Product("Pipe Wrench", 18.99, "/project/demo/images/pipewrench.png"),
+                new Product("Rubber Hand Gloves", 9.99, "/project/demo/images/rubberhandgloves.png"),
+                new Product("Steel Hammer", 14.99, "/project/demo/images/steelhammer.png"),
+                new Product("Steel Plier", 12.99, "/project/demo/images/steelplier.png"),
+                new Product("Toolbox", 29.99, "/project/demo/images/toolbox.png")
         };
 
         // Clear the default template from the GridPane
-        productGrid.getChildren().remove(productTemplate);
+        if (productTemplate != null) {
+            productGrid.getChildren().remove(productTemplate);
+        }
 
         // Populate the GridPane with product data
         int column = 0;
@@ -52,15 +69,15 @@ public class ProductCatalogController {
 
         for (Product product : products) {
             try {
-                // Load the product template from FXML
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/ProductCatalog.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/ProductCard.fxml"));
                 VBox productCard = loader.load();
+                // Match root node type in ProductCard.fxml
 
-                // Access the controller of the template
+                // Set product data in the controller
                 ProductCardController cardController = loader.getController();
                 cardController.setProductData(product);
 
-                // Add the product card to the GridPane
+                // Add to the grid
                 productGrid.add(productCard, column, row);
 
                 column++;
@@ -72,11 +89,6 @@ public class ProductCatalogController {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void addToCart(Product product) {
-        cart.addProduct(product);
-        System.out.println("Added to cart: " + product.getName());
     }
 
     @FXML

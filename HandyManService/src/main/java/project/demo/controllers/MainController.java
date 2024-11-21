@@ -13,14 +13,24 @@ public class MainController {
     @FXML
     private ScrollPane scrollPane;
 
+    private String currentPage = ""; // Track the currently loaded page
+
     private void loadPage(String fxmlFile) {
+        if (currentPage.equals(fxmlFile)) {
+            System.out.println("Page already loaded: " + fxmlFile);
+            return; // Prevent reloading the same page
+        }
+
         try {
+            System.out.println("Loading FXML: " + fxmlFile);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             AnchorPane newPage = loader.load();
             scrollPane.setContent(newPage);
+            currentPage = fxmlFile; // Update the currently loaded page
+            System.out.println("Successfully loaded: " + fxmlFile);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load page: " + fxmlFile);
+            System.err.println("Failed to load page: " + fxmlFile);
         }
     }
 
@@ -31,18 +41,26 @@ public class MainController {
 
     @FXML
     private void handleHomeClick() {
-        loadPage("/project/demo/FXML/HomePage.fxml");
+        loadPage("/project/demo/fxml/HomePage.fxml");
     }
 
-    public void handleAboutUsClick(ActionEvent actionEvent) {
-    }
-
+    @FXML
     public void handleShopClick(ActionEvent actionEvent) {
+        loadPage("/project/demo/fxml/ProductCatalog.fxml");
     }
 
-    public void handleServiceClick(ActionEvent actionEvent) {
+    @FXML
+    public void handleCartClick(ActionEvent actionEvent) {
+        loadPage("/project/demo/fxml/CartPage.fxml");
     }
 
+    @FXML
+    public void handleCheckoutClick(ActionEvent actionEvent) {
+        loadPage("/project/demo/fxml/CheckoutPage.fxml");
+    }
+
+    @FXML
     public void handleBookServiceClick(ActionEvent actionEvent) {
+        loadPage("/project/demo/fxml/BookService.fxml");
     }
 }

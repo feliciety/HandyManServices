@@ -67,15 +67,11 @@ public class SignInController {
     private void loadHomePage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/MainpageStructure.fxml"));
-            AnchorPane homePageRoot = loader.load(); // Load the HomePage FXML
-
-            // Create a new scene for the HomePage
+            AnchorPane homePageRoot = loader.load();
+            Stage stage = (Stage) SignInButton.getScene().getWindow();
             Scene homePageScene = new Scene(homePageRoot);
-
-            // Get the current stage (window) and set the new scene
-            Stage stage = (Stage) SignInButton.getScene().getWindow(); // Get the stage of the current scene
-            stage.setScene(homePageScene); // Set the new scene
-            stage.show(); // Show the new scene
+            stage.setScene(homePageScene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading MainpageStructure.fxml.");
