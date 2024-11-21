@@ -9,7 +9,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/SignIn.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/MainPageStructure.fxml"));
             Scene scene = new Scene(loader.load(), 1440, 730);
             primaryStage.setTitle("HandyMan");
             primaryStage.setScene(scene);

@@ -5,14 +5,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="730" prefWidth="1440" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.CheckoutController">
+<AnchorPane fx:id="anchorPane" prefHeight="1532.0" prefWidth="1440" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.CheckoutController">
 
-    <HBox fx:id="topBar" alignment="CENTER_LEFT" layoutX="0" layoutY="0" prefHeight="70.0" prefWidth="1440.0" spacing="10" style="-fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="0.0">
+    <HBox fx:id="topBar" alignment="CENTER_LEFT" layoutX="-6.2" layoutY="866.0" prefHeight="70.0" prefWidth="1440.0" spacing="10" style="-fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="-6.2">
         <Label prefHeight="35.0" prefWidth="208.0" text="Checkout">
          <HBox.margin>
             <Insets left="40.0" />
@@ -26,15 +28,15 @@
          </HBox.margin></Button>
     </HBox>
 
-    <TableView fx:id="checkoutTable" layoutX="20" layoutY="70" prefHeight="500" prefWidth="1400.0">
+    <TableView fx:id="checkoutTable" layoutX="10.0" layoutY="936.0" prefHeight="442.0" prefWidth="1122.0">
         <columns>
-            <TableColumn fx:id="productNameColumn" prefWidth="600" text="Product Name" />
-            <TableColumn fx:id="productPriceColumn" prefWidth="200" text="Price" />
-            <TableColumn fx:id="productQuantityColumn" prefWidth="200" text="Quantity" />
-            <TableColumn fx:id="productTotalColumn" prefWidth="200" text="Total" />
+            <TableColumn fx:id="productNameColumn" prefWidth="356.00006103515625" text="Product Name" />
+            <TableColumn fx:id="productPriceColumn" prefWidth="192.800048828125" text="Price" />
+            <TableColumn fx:id="productQuantityColumn" prefWidth="114.4000244140625" text="Quantity" />
+            <TableColumn fx:id="productTotalColumn" prefWidth="292.7999267578125" text="Total" />
         </columns>
     </TableView>
-   <VBox fx:id="bottomBar" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="580.0">
+   <VBox fx:id="bottomBar" layoutX="1160.2" layoutY="1070.4" AnchorPane.leftAnchor="1160.2" AnchorPane.topAnchor="1070.4">
       <children>
            <Label style="-fx-font-size: 16px;" text="Total Items:" />
            <Label fx:id="totalItemsLabel" style="-fx-font-size: 16px;" />
@@ -43,4 +45,9 @@
            <Button fx:id="confirmCheckoutButton" onAction="#confirmCheckout" styleClass="primary-button" text="Confirm and Checkout" />
       </children>
    </VBox>
+   <ImageView fitHeight="783.0" fitWidth="1440.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/HomePageBGBLue.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

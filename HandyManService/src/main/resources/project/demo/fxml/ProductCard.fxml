@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="productCard" alignment="CENTER" prefHeight="300" prefWidth="200" spacing="10" style="-fx-border-color: #ccc; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.ProductCardController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+
+    <!-- Product Image -->
+    <ImageView fx:id="productImage" fitHeight="184.0" fitWidth="155.0" preserveRatio="true">
+        <image>
+            <Image url="@../images/helmet.png" />
+        </image>
+    </ImageView>
+
+    <!-- Product Name -->
+    <Label fx:id="productName" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Safety Helmet" wrapText="true" />
+
+    <!-- Product Price -->
+    <Label fx:id="productPrice" style="-fx-font-size: 12px; -fx-text-fill: #666;" text="\$21.43" />
+
+    <!-- Add to Cart Button -->
+    <Button fx:id="addToCartButton" style="-fx-background-color: #ffc107; -fx-text-fill: white;" text="Add to Cart" />
+</VBox>

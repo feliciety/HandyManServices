@@ -1,0 +1,56 @@
+.button {
+    -fx-background-color: #3E66FF;
+    -fx-text-fill: #3d4145;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15px;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    -fx-background-color: #2D4FCC;
+}
+
+.text-field {
+    -fx-background-radius: 15px;
+    -fx-background-color: #67608f;
+}
+.button-transparent {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.scroll-pane {
+    -fx-background: transparent;
+}
+
+#header {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+}
+
+.combo-box {
+    -fx-font-size: 16px;
+}
+
+.combo-box .list-cell {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3d4145;
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+
+.combo-box .text {
+    -fx-fill: #3d4145;
+}
+
+.combo-box .arrow-button {
+    -fx-padding: 0.5em; /* Optional: Adjust padding around the button */
+}
+
+.combo-box .arrow {
+    -fx-background-color: #3d4145; /* Sets the color of the dropdown icon */
+    -fx-padding: 0.3em; /* Optional: Adjust padding inside the icon */
+}
