@@ -52,10 +52,6 @@ public class QuantityControlController {
         updateLabel();
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public void setQuantityChangeListener(QuantityChangeListener listener) {
         this.quantityChangeListener = listener;
     }
