@@ -1,15 +1,18 @@
 package project.demo.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import project.demo.models.CartItem;
+
+import java.io.IOException;
 
 public class CartController {
 
@@ -23,55 +26,101 @@ public class CartController {
     private Button checkoutButton;
 
     @FXML
-    private TableView<?> cartTable;
+    private TableView<CartItem> cartTable;
 
     @FXML
-    private TableColumn<?, ?> productNameColumn;
+    private TableColumn<CartItem, String> productNameColumn;
 
     @FXML
-    private TableColumn<?, ?> productPriceColumn;
+    private TableColumn<CartItem, Double> productPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> productQuantityColumn;
+    private TableColumn<CartItem, HBox> productQuantityColumn;
 
     @FXML
-    private TableColumn<?, ?> productTotalColumn;
+    private TableColumn<CartItem, Double> productTotalColumn;
 
     @FXML
     private Label subtotalLabel;
 
-    /**
-     * Initialize method to dynamically add a stylesheet if needed.
-     */
+    private ObservableList<CartItem> cartItems;
+
     @FXML
     public void initialize() {
-        // Dynamically add the stylesheet
-        if (anchorPane.getScene() != null) {
-            anchorPane.getScene().getStylesheets().add(getClass().getResource("/project/demo/CSS/styles.css").toExternalForm());
-        } else {
-            anchorPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
-                if (newScene != null) {
-                    newScene.getStylesheets().add(getClass().getResource("/project/demo/CSS/styles.css").toExternalForm());
+        cartItems = FXCollections.observableArrayList();
+
+        // Bind table columns to CartItem properties
+        productNameColumn.setCellValueFactory(data -> data.getValue().productNameProperty());
+        productPriceColumn.setCellValueFactory(data -> data.getValue().productPriceProperty().asObject());
+        productTotalColumn.setCellValueFactory(data -> data.getValue().productTotalProperty().asObject());
+
+        // Set custom cell factory for quantity column
+        productQuantityColumn.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(HBox quantityControl, boolean empty) {
+                super.updateItem(quantityControl, empty);
+                if (empty || quantityControl == null) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(quantityControl);
                 }
+            }
+        });
+
+        cartTable.setItems(cartItems);
+
+        updateSubtotal();
+    }
+
+    public void addToCart(String productName, double price) {
+        CartItem existingItem = cartItems.stream()
+                .filter(item -> item.getProductName().equals(productName))
+                .findFirst()
+                .orElse(null);
+
+        if (existingItem != null) {
+            existingItem.setQuantity(existingItem.getQuantity() + 1);
+            existingItem.updateTotal();
+        } else {
+            CartItem newItem = new CartItem(productName, price, 1, price, null);
+            HBox quantityControl = createQuantityControl(newItem);
+            newItem.setQuantityControl(quantityControl);
+            cartItems.add(newItem);
+        }
+        cartTable.refresh();
+        updateSubtotal();
+    }
+
+    private HBox createQuantityControl(CartItem cartItem) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/QuantityControl.fxml"));
+            HBox quantityControl = loader.load();
+            QuantityControlController controller = loader.getController();
+            controller.setQuantity(cartItem.getQuantity());
+            controller.setQuantityChangeListener(newQuantity -> {
+                cartItem.setQuantity(newQuantity);
+                cartItem.updateTotal();
+                cartTable.refresh();
+                updateSubtotal();
             });
+            return quantityControl;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
-    /**
-     * Method to handle navigation to the product catalog.
-     * @param actionEvent the ActionEvent triggered by the button
-     */
+    private void updateSubtotal() {
+        double subtotal = cartItems.stream().mapToDouble(CartItem::getTotal).sum();
+        subtotalLabel.setText(String.format("Subtotal: $%.2f", subtotal));
+    }
+
     @FXML
     public void goToCatalog(ActionEvent actionEvent) {
         try {
-            // Get the current stage
             Stage stage = (Stage) catalogButton.getScene().getWindow();
-
-            // Load the ProductCatalog.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/ProductCatalog.fxml"));
             Scene scene = new Scene(loader.load(), 1440, 730);
-
-            // Set the scene to the stage
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -79,21 +128,12 @@ public class CartController {
         }
     }
 
-    /**
-     * Method to handle navigation to the checkout page.
-     * @param actionEvent the ActionEvent triggered by the button
-     */
     @FXML
     public void proceedToCheckout(ActionEvent actionEvent) {
         try {
-            // Get the current stage
             Stage stage = (Stage) checkoutButton.getScene().getWindow();
-
-            // Load the CheckoutPage.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/CheckoutPage.fxml"));
             Scene scene = new Scene(loader.load(), 1440, 730);
-
-            // Set the scene to the stage
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
