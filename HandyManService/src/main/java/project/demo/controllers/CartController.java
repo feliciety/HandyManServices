@@ -49,12 +49,10 @@ public class CartController {
     public void initialize() {
         cartItems = FXCollections.observableArrayList();
 
-        // Bind table columns to CartItem properties
         productNameColumn.setCellValueFactory(data -> data.getValue().productNameProperty());
         productPriceColumn.setCellValueFactory(data -> data.getValue().productPriceProperty().asObject());
         productTotalColumn.setCellValueFactory(data -> data.getValue().productTotalProperty().asObject());
 
-        // Set custom cell factory for quantity column
         productQuantityColumn.setCellFactory(tc -> new TableCell<>() {
             @Override
             protected void updateItem(HBox quantityControl, boolean empty) {
@@ -96,6 +94,7 @@ public class CartController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/QuantityControl.fxml"));
             HBox quantityControl = loader.load();
             QuantityControlController controller = loader.getController();
+
             controller.setQuantity(cartItem.getQuantity());
             controller.setQuantityChangeListener(newQuantity -> {
                 cartItem.setQuantity(newQuantity);
@@ -103,6 +102,7 @@ public class CartController {
                 cartTable.refresh();
                 updateSubtotal();
             });
+
             return quantityControl;
         } catch (IOException e) {
             e.printStackTrace();

@@ -4,12 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox xmlns:fx="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="project.demo.controllers.QuantityControlController"
-      spacing="10" alignment="CENTER">
-    <children>
-        <Button fx:id="decreaseButton" text="-" onAction="#decreaseQuantity" />
-        <Label fx:id="quantityLabel" text="1" style="-fx-font-size: 16px;" />
-        <Button fx:id="increaseButton" text="+" onAction="#increaseQuantity" />
-    </children>
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.QuantityControlController" spacing="10" alignment="CENTER">
+    <Button fx:id="decreaseButton" text="-" onAction="#decreaseQuantity" />
+    <Label fx:id="quantityLabel" text="1" style="-fx-font-size: 16px;" />
+    <Button fx:id="increaseButton" text="+" onAction="#increaseQuantity" />
 </HBox>
