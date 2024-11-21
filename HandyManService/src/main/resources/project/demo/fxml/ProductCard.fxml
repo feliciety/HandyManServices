@@ -20,7 +20,7 @@
     </ImageView>
 
     <!-- Product Name -->
-    <Label fx:id="productName" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Safety Helmet" wrapText="true" />
+    <Label fx:id="productLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="161.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Safety Helmet" />
 
     <!-- Product Price -->
     <Label fx:id="productPrice" style="-fx-font-size: 12px; -fx-text-fill: #666;" text="\$21.43" />

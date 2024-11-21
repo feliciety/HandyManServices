@@ -1,77 +1,67 @@
 package project.demo.models;
 
 import javafx.beans.property.*;
+
 import javafx.scene.layout.HBox;
 
 public class CartItem {
+
     private final StringProperty productName;
     private final DoubleProperty productPrice;
-    private final IntegerProperty productQuantity;
-    private final DoubleProperty productTotal;
-    private final ObjectProperty<HBox> quantityControl;
+    private final IntegerProperty quantity;
+    private final DoubleProperty totalPrice;
+    private final HBox quantityControl;
 
-    public CartItem(String productName, double productPrice, int quantity, double total, HBox quantityControl) {
+    public CartItem(String productName, double productPrice, int quantity, double totalPrice, HBox quantityControl) {
         this.productName = new SimpleStringProperty(productName);
         this.productPrice = new SimpleDoubleProperty(productPrice);
-        this.productQuantity = new SimpleIntegerProperty(quantity);
-        this.productTotal = new SimpleDoubleProperty(total);
-        this.quantityControl = new SimpleObjectProperty<>(quantityControl);
-    }
-
-    public StringProperty productNameProperty() {
-        return productName;
-    }
-
-    public DoubleProperty productPriceProperty() {
-        return productPrice;
-    }
-
-    public IntegerProperty productQuantityProperty() {
-        return productQuantity;
-    }
-
-    public DoubleProperty productTotalProperty() {
-        return productTotal;
-    }
-
-    public ObjectProperty<HBox> quantityControlProperty() {
-        return quantityControl;
+        this.quantity = new SimpleIntegerProperty(quantity);
+        this.totalPrice = new SimpleDoubleProperty(totalPrice);
+        this.quantityControl = quantityControl;
     }
 
     public String getProductName() {
         return productName.get();
     }
 
+    public StringProperty productNameProperty() {
+        return productName;
+    }
+
     public double getProductPrice() {
         return productPrice.get();
     }
 
+    public DoubleProperty productPriceProperty() {
+        return productPrice;
+    }
+
     public int getQuantity() {
-        return productQuantity.get();
+        return quantity.get();
     }
 
-    public double getTotal() {
-        return productTotal.get();
-    }
-
-    public HBox getQuantityControl() {
-        return quantityControl.get();
+    public IntegerProperty quantityProperty() {
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        productQuantity.set(quantity);
+        this.quantity.set(quantity);
         updateTotal();
     }
 
-    public void setTotal(double total) {
-        productTotal.set(total);
+    public double getTotal() {
+        return totalPrice.get();
     }
 
-    public void setQuantityControl(HBox quantityControl) {
-        this.quantityControl.set(quantityControl);
+    public DoubleProperty productTotalProperty() {
+        return totalPrice;
     }
 
     public void updateTotal() {
-        setTotal(getProductPrice() * getQuantity());
+        this.totalPrice.set(this.quantity.get() * this.productPrice.get());
+    }
+
+    public HBox getQuantityControl() {
+        return quantityControl;
     }
 }

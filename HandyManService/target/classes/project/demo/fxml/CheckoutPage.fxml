@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -45,9 +43,4 @@
            <Button fx:id="confirmCheckoutButton" onAction="#confirmCheckout" styleClass="primary-button" text="Confirm and Checkout" />
       </children>
    </VBox>
-   <ImageView fitHeight="783.0" fitWidth="1440.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/HomePageBGBLue.png" />
-      </image>
-   </ImageView>
 </AnchorPane>

@@ -49,10 +49,12 @@ public class CartController {
     public void initialize() {
         cartItems = FXCollections.observableArrayList();
 
+        // Bind columns to CartItem properties
         productNameColumn.setCellValueFactory(data -> data.getValue().productNameProperty());
         productPriceColumn.setCellValueFactory(data -> data.getValue().productPriceProperty().asObject());
         productTotalColumn.setCellValueFactory(data -> data.getValue().productTotalProperty().asObject());
 
+        // Set custom cell factory for quantity controls
         productQuantityColumn.setCellFactory(tc -> new TableCell<>() {
             @Override
             protected void updateItem(HBox quantityControl, boolean empty) {
@@ -66,7 +68,6 @@ public class CartController {
         });
 
         cartTable.setItems(cartItems);
-
         updateSubtotal();
     }
 
@@ -80,33 +81,39 @@ public class CartController {
             existingItem.setQuantity(existingItem.getQuantity() + 1);
             existingItem.updateTotal();
         } else {
-            CartItem newItem = new CartItem(productName, price, 1, price, null);
-            HBox quantityControl = createQuantityControl(newItem);
-            newItem.setQuantityControl(quantityControl);
-            cartItems.add(newItem);
+            HBox quantityControl = createQuantityControl(productName, price);
+            cartItems.add(new CartItem(productName, price, 1, price, quantityControl));
         }
+
         cartTable.refresh();
         updateSubtotal();
     }
 
-    private HBox createQuantityControl(CartItem cartItem) {
+    private HBox createQuantityControl(String productName, double price) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/QuantityControl.fxml"));
             HBox quantityControl = loader.load();
-            QuantityControlController controller = loader.getController();
 
-            controller.setQuantity(cartItem.getQuantity());
+            QuantityControlController controller = loader.getController();
+            controller.setQuantity(1); // Initial quantity
             controller.setQuantityChangeListener(newQuantity -> {
-                cartItem.setQuantity(newQuantity);
-                cartItem.updateTotal();
-                cartTable.refresh();
-                updateSubtotal();
+                CartItem cartItem = cartItems.stream()
+                        .filter(item -> item.getProductName().equals(productName))
+                        .findFirst()
+                        .orElse(null);
+
+                if (cartItem != null) {
+                    cartItem.setQuantity(newQuantity);
+                    cartItem.updateTotal();
+                    cartTable.refresh();
+                    updateSubtotal();
+                }
             });
 
             return quantityControl;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return new HBox();
         }
     }
 

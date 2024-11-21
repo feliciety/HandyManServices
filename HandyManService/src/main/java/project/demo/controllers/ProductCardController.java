@@ -5,49 +5,66 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import project.demo.models.Cart;
 import project.demo.models.Product;
 
 public class ProductCardController {
 
-    public VBox productCard;
     @FXML
-    private ImageView productImage;
+    private Label productNameLabel;
 
     @FXML
-    private Label productName;
+    private Label productPriceLabel;
 
     @FXML
-    private Label productPrice;
+    private ImageView productImageView;
+
+    @FXML
+    private HBox quantityHBox;
 
     @FXML
     private Button addToCartButton;
 
-    private Product product;
+    private final Cart cart = Cart.getInstance();
 
     public void setProductData(Product product) {
-        this.product = product;
+        try {
+            productNameLabel.setText(product.getName());
+            productPriceLabel.setText(String.format("$%.2f", product.getPrice()));
+            productImageView.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
 
-        // Set product details in UI
-        productName.setText(product.getName());
-        productPrice.setText(String.format("$%.2f", product.getPrice()));
+            // Initialize quantity control
+            Button decreaseButton = new Button("-");
+            Label quantityLabel = new Label("1");
+            Button increaseButton = new Button("+");
 
-        // Load product image
-        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
-            try {
-                productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
-            } catch (Exception e) {
-                System.err.println("Failed to load image for product: " + product.getName());
-                e.printStackTrace();
-            }
-        } else {
-            System.err.println("Image path is empty or null for product: " + product.getName());
+            decreaseButton.setOnAction(e -> {
+                int quantity = Integer.parseInt(quantityLabel.getText());
+                if (quantity > 1) {
+                    quantity--;
+                    quantityLabel.setText(String.valueOf(quantity));
+                }
+            });
+
+            increaseButton.setOnAction(e -> {
+                int quantity = Integer.parseInt(quantityLabel.getText());
+                quantity++;
+                quantityLabel.setText(String.valueOf(quantity));
+            });
+
+            quantityHBox.getChildren().clear();
+            quantityHBox.getChildren().addAll(decreaseButton, quantityLabel, increaseButton);
+
+            addToCartButton.setOnAction(e -> {
+                int quantity = Integer.parseInt(quantityLabel.getText());
+                cart.addProduct(product, quantity);
+                System.out.println("[DEBUG] Added to cart: " + product.getName() + ", Quantity: " + quantity);
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("[ERROR] Failed to set product data for: " + product.getName());
         }
-    }
-
-    @FXML
-    private void handleAddToCart() {
-        System.out.println("Added to cart: " + product.getName());
-        // Add your logic to add the product to the cart
     }
 }

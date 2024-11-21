@@ -7,16 +7,16 @@ import javafx.scene.control.Label;
 public class QuantityControlController {
 
     @FXML
-    private Button decreaseButton;
+    private Button increaseButton;
 
     @FXML
-    private Button increaseButton;
+    private Button decreaseButton;
 
     @FXML
     private Label quantityLabel;
 
-    private int quantity = 1;
-    private QuantityChangeListener quantityChangeListener;
+    private int quantity;
+    private QuantityChangeListener listener;
 
     @FXML
     public void initialize() {
@@ -24,36 +24,31 @@ public class QuantityControlController {
     }
 
     @FXML
-    private void decreaseQuantity() {
-        if (quantity > 1) {
-            quantity--;
-            updateLabel();
-            if (quantityChangeListener != null) {
-                quantityChangeListener.onQuantityChanged(quantity);
-            }
-        }
+    private void increaseQuantity() {
+        setQuantity(quantity + 1);
     }
 
     @FXML
-    private void increaseQuantity() {
-        quantity++;
-        updateLabel();
-        if (quantityChangeListener != null) {
-            quantityChangeListener.onQuantityChanged(quantity);
+    private void decreaseQuantity() {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
         }
-    }
-
-    private void updateLabel() {
-        quantityLabel.setText(String.valueOf(quantity));
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
         updateLabel();
+        if (listener != null) {
+            listener.onQuantityChanged(quantity);
+        }
     }
 
     public void setQuantityChangeListener(QuantityChangeListener listener) {
-        this.quantityChangeListener = listener;
+        this.listener = listener;
+    }
+
+    private void updateLabel() {
+        quantityLabel.setText(String.valueOf(quantity));
     }
 
     public interface QuantityChangeListener {
