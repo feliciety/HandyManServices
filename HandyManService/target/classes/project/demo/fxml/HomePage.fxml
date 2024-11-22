@@ -24,12 +24,12 @@
             <Font name="Arial Bold" size="53.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="107.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Your Trusted Partner in Quality Carpentry&quot;">
+      <Text fill="WHITE" layoutX="154.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Your Trusted Partner in Quality Carpentry&quot;">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Button layoutX="154.0" layoutY="554.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="135.0" style="-fx-background-color: #FFC107; -fx-background-radius: 30;" text="Learn More" textFill="#03009c">
+      <Button layoutX="183.0" layoutY="554.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="135.0" style="-fx-background-color: #FFC107; -fx-background-radius: 30;" text="Learn More" textFill="#03009c">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -38,7 +38,7 @@
             <Image url="@../images/HomepageBG2.png" />
          </image>
       </ImageView>
-      <Button layoutX="341.0" layoutY="554.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="135.0" style="-fx-background-color: #FFC107; -fx-background-radius: 30;" text="Get a quote" textFill="#03009c">
+      <Button layoutX="370.0" layoutY="554.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="135.0" style="-fx-background-color: #FFC107; -fx-background-radius: 30;" text="Get a quote" textFill="#03009c">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

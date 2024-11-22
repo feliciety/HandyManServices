@@ -20,10 +20,10 @@
     </ImageView>
 
     <!-- Product Name -->
-    <Label fx:id="productLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="161.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Safety Helmet" />
+    <Label fx:id="productName" style="-fx-font-size: 14px; -fx-font-weight: bold;-fx-text-fill: #000000;" text="Safety Helmet" wrapText="true" />
 
     <!-- Product Price -->
-    <Label fx:id="productPrice" style="-fx-font-size: 12px; -fx-text-fill: #666;" text="\$21.43" />
+    <Label fx:id="productPrice" style="-fx-font-size: 12px; -fx-text-fill: #000000;" text="\$21.43" />
 
     <!-- Add to Cart Button -->
     <Button fx:id="addToCartButton" style="-fx-background-color: #ffc107; -fx-text-fill: white;" text="Add to Cart" />

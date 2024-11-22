@@ -31,8 +31,6 @@ public class ProductCatalogController {
 
     @FXML
     private void initialize() {
-        System.out.println("[DEBUG] Initializing Product Catalog...");
-
         // Apply stylesheet dynamically
         if (anchorPane != null && anchorPane.getScene() != null) {
             anchorPane.getScene().getStylesheets().add(getClass().getResource("/project/demo/CSS/styles.css").toExternalForm());
@@ -54,7 +52,7 @@ public class ProductCatalogController {
                 new Product("Metal Hand Jigsaw", 40.99, "/project/demo/images/metalhandjigsaw.png"),
                 new Product("Metal Shovel", 22.49, "/project/demo/images/metalshovel.png"),
                 new Product("Pipe Wrench", 18.99, "/project/demo/images/pipewrench.png"),
-                new Product("Rubber Hand Gloves", 9.99, "/project/demo/images/rubberhandgloves.png"),
+                new Product("Rubber Hand Gloves", 9.99, "/project/demo/images/ruberhandgloves.png"),
                 new Product("Steel Hammer", 14.99, "/project/demo/images/steelhammer.png"),
                 new Product("Steel Plier", 12.99, "/project/demo/images/steelplier.png"),
                 new Product("Toolbox", 29.99, "/project/demo/images/toolbox.png")
@@ -73,6 +71,7 @@ public class ProductCatalogController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/demo/fxml/ProductCard.fxml"));
                 VBox productCard = loader.load();
+                // Match root node type in ProductCard.fxml
 
                 // Set product data in the controller
                 ProductCardController cardController = loader.getController();
@@ -81,8 +80,6 @@ public class ProductCatalogController {
                 // Add to the grid
                 productGrid.add(productCard, column, row);
 
-                System.out.println("[DEBUG] Added product to grid: " + product.getName());
-
                 column++;
                 if (column == 3) { // 3 columns per row
                     column = 0;
@@ -90,7 +87,6 @@ public class ProductCatalogController {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                System.err.println("[ERROR] Failed to load product card for: " + product.getName());
             }
         }
     }
@@ -104,7 +100,6 @@ public class ProductCatalogController {
             stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("[ERROR] Failed to navigate to cart.");
         }
     }
 }

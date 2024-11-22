@@ -5,66 +5,57 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import project.demo.models.Cart;
+import javafx.scene.layout.VBox;
 import project.demo.models.Product;
 
 public class ProductCardController {
 
+    public VBox productCard;
     @FXML
-    private Label productNameLabel;
+    private ImageView productImage;
 
     @FXML
-    private Label productPriceLabel;
+    private Label productName;
 
     @FXML
-    private ImageView productImageView;
-
-    @FXML
-    private HBox quantityHBox;
+    private Label productPrice;
 
     @FXML
     private Button addToCartButton;
 
-    private final Cart cart = Cart.getInstance();
+    private Product product;
 
     public void setProductData(Product product) {
-        try {
-            productNameLabel.setText(product.getName());
-            productPriceLabel.setText(String.format("$%.2f", product.getPrice()));
-            productImageView.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
+        this.product = product;
 
-            // Initialize quantity control
-            Button decreaseButton = new Button("-");
-            Label quantityLabel = new Label("1");
-            Button increaseButton = new Button("+");
+        // Debug: Check if the product name is null or empty
+        System.out.println("Setting product data: " + product);
 
-            decreaseButton.setOnAction(e -> {
-                int quantity = Integer.parseInt(quantityLabel.getText());
-                if (quantity > 1) {
-                    quantity--;
-                    quantityLabel.setText(String.valueOf(quantity));
-                }
-            });
-
-            increaseButton.setOnAction(e -> {
-                int quantity = Integer.parseInt(quantityLabel.getText());
-                quantity++;
-                quantityLabel.setText(String.valueOf(quantity));
-            });
-
-            quantityHBox.getChildren().clear();
-            quantityHBox.getChildren().addAll(decreaseButton, quantityLabel, increaseButton);
-
-            addToCartButton.setOnAction(e -> {
-                int quantity = Integer.parseInt(quantityLabel.getText());
-                cart.addProduct(product, quantity);
-                System.out.println("[DEBUG] Added to cart: " + product.getName() + ", Quantity: " + quantity);
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("[ERROR] Failed to set product data for: " + product.getName());
+        // Set product details in UI
+        if (product.getName() != null && !product.getName().isEmpty()) {
+            productName.setText(product.getName());
+        } else {
+            System.err.println("Product name is null or empty for product: " + product);
         }
+
+        productPrice.setText(String.format("$%.2f", product.getPrice()));
+
+        // Load product image
+        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+            try {
+                productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
+            } catch (Exception e) {
+                System.err.println("Failed to load image for product: " + product.getName());
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image path is empty or null for product: " + product.getName());
+        }
+    }
+
+    @FXML
+    private void handleAddToCart() {
+        System.out.println("Added to cart: " + product.getName());
+        // Add your logic to add the product to the cart
     }
 }

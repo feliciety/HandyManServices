@@ -4,40 +4,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Cart {
+    private final ObservableList<Product> products = FXCollections.observableArrayList();
 
-    private final ObservableList<CartItem> cartItems;
-
-    private static final Cart instance = new Cart();
+    private static Cart instance;
 
     private Cart() {
-        cartItems = FXCollections.observableArrayList();
     }
 
     public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart();
+        }
         return instance;
     }
 
-    public ObservableList<CartItem> getCartItems() {
-        return cartItems;
+    public ObservableList<Product> getProducts() {
+        return products;
     }
 
-    public void addProduct(Product product, int quantity) {
-        CartItem existingItem = cartItems.stream()
-                .filter(item -> item.getProductName().equals(product.getName()))
-                .findFirst()
-                .orElse(null);
+    public void addProduct(Product product) {
+        products.add(product);
+    }
 
-        if (existingItem != null) {
-            existingItem.setQuantity(existingItem.getQuantity() + quantity);
-            existingItem.updateTotal();
-        } else {
-            cartItems.add(new CartItem(
-                    product.getName(),
-                    product.getPrice(),
-                    quantity,
-                    product.getPrice() * quantity,
-                    null // You can later set a quantity control HBox
-            ));
-        }
+    public void clear() {
+        products.clear();
     }
 }
