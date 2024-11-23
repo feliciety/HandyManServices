@@ -1,9 +1,11 @@
 package project.demo.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +30,27 @@ public class ProductCatalogController {
 
     @FXML
     private AnchorPane anchorPane;
+
+    @FXML
+    private ComboBox<String> cuttingToolsComboBox;
+
+    @FXML
+    private ComboBox<String> drillingToolsComboBox;
+
+    @FXML
+    private ComboBox<String> measuringToolsComboBox;
+
+    @FXML
+    private ComboBox<String> finishesComboBox;
+
+    @FXML
+    private ComboBox<String> safetyGearComboBox;
+
+    @FXML
+    private ComboBox<String> accessoriesComboBox;
+
+    @FXML
+    private ComboBox<String> specializedToolsComboBox;
 
     @FXML
     private void initialize() {
@@ -81,7 +104,7 @@ public class ProductCatalogController {
                 productGrid.add(productCard, column, row);
 
                 column++;
-                if (column == 3) { // 3 columns per row
+                if (column == 4) { // 4 columns per row
                     column = 0;
                     row++;
                 }
@@ -89,6 +112,20 @@ public class ProductCatalogController {
                 e.printStackTrace();
             }
         }
+
+        // Set up ComboBoxes
+        setupComboBox(cuttingToolsComboBox);
+        setupComboBox(drillingToolsComboBox);
+        setupComboBox(measuringToolsComboBox);
+        setupComboBox(finishesComboBox);
+        setupComboBox(safetyGearComboBox);
+        setupComboBox(accessoriesComboBox);
+        setupComboBox(specializedToolsComboBox);
+    }
+
+    private void setupComboBox(ComboBox<String> comboBox) {
+        // Show dropdown when clicked
+        comboBox.setOnMouseClicked(event -> comboBox.show());
     }
 
     @FXML

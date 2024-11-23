@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="730" prefWidth="1440" stylesheets="@project/demo/CSS/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.demo.controllers.ProductCatalogController">
 
@@ -23,7 +27,7 @@
     </HBox>
 
     <!-- Product ScrollPane -->
-    <ScrollPane fx:id="scrollPane" layoutX="20" layoutY="80" prefHeight="630" prefWidth="1400" style="-fx-background-color: #ffffff;">
+    <ScrollPane fx:id="scrollPane" layoutX="20" layoutY="80" prefHeight="630" prefWidth="1037.0" style="-fx-background-color: #ffffff;">
         <content>
             <GridPane fx:id="productGrid" alignment="CENTER" hgap="20.0" vgap="20.0">
                 <padding>
@@ -32,4 +36,99 @@
             </GridPane>
         </content>
     </ScrollPane>
+
+    <!-- Filter Section -->
+    <VBox layoutX="1100" layoutY="80" prefHeight="609.0" prefWidth="300" spacing="10" style="-fx-padding: 20; -fx-background-color: #f9f9f9; -fx-border-color: lightgray; -fx-border-width: 1;">
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Filters" />
+
+        <!-- Cutting Tools ComboBox -->
+        <ComboBox fx:id="cuttingToolsComboBox" prefWidth="195.0" promptText="Cutting Tools">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Saws" />
+                    <String fx:value="Planers" />
+                    <String fx:value="Scrapers" />
+                    <String fx:value="Utility Knives" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Drilling Tools ComboBox -->
+        <ComboBox fx:id="drillingToolsComboBox" prefWidth="195.0" promptText="Drilling and Fastening Tools">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Drills" />
+                    <String fx:value="Drill Bits" />
+                    <String fx:value="Screwdrivers" />
+                    <String fx:value="Staplers" />
+                    <String fx:value="Hammers" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Measuring Tools ComboBox -->
+        <ComboBox fx:id="measuringToolsComboBox" prefWidth="195.0" promptText="Measuring and Layout Tools">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Tape Measure" />
+                    <String fx:value="Level" />
+                    <String fx:value="Square" />
+                    <String fx:value="Caliper" />
+                    <String fx:value="Chalk Line" />
+                    <String fx:value="Compass" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Finishes ComboBox -->
+        <ComboBox fx:id="finishesComboBox" prefWidth="195.0" promptText="Woodworking Finishes">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Sandpaper" />
+                    <String fx:value="Wood Stains" />
+                    <String fx:value="Varnishes" />
+                    <String fx:value="Paints" />
+                    <String fx:value="Wood Glue" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Safety Gear ComboBox -->
+        <ComboBox fx:id="safetyGearComboBox" prefWidth="195.0" promptText="Safety Gear">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Safety Glasses" />
+                    <String fx:value="Dust Masks" />
+                    <String fx:value="Work Gloves" />
+                    <String fx:value="Hearing Protection" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Accessories ComboBox -->
+        <ComboBox fx:id="accessoriesComboBox" prefWidth="195.0" promptText="Carpentry Accessories">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Clamps" />
+                    <String fx:value="Workbenches" />
+                    <String fx:value="Bench Vices" />
+                    <String fx:value="Carpenter's Square" />
+                    <String fx:value="Jigs" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Specialized Tools ComboBox -->
+        <ComboBox fx:id="specializedToolsComboBox" prefWidth="195.0" promptText="Specialized Tools">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Wood Routers" />
+                    <String fx:value="Biscuit Joiner" />
+                    <String fx:value="Doweling Jigs" />
+                    <String fx:value="Lathe" />
+                    <String fx:value="Sanders" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </VBox>
 </AnchorPane>
